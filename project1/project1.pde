@@ -2,9 +2,16 @@ PVector position, target, position_satellite;
 PImage current, wifi;
 boolean isRunning = false;
 float angle_satellit;
+int numFoods = 15;
+
+Food[] foods = new Food[numFoods];
 
 void setup() { 
   size(1000, 600, P2D);
+  
+   for (int i=0; i<foods.length; i++) {
+    foods[i] = new Food(random(width), random(height));
+  }
   
   position = new PVector(width/2, height/2);
   position_satellite = new PVector(0.0, 0.0);
@@ -19,7 +26,11 @@ void setup() {
 }
 
 void draw() {
-  background(127);
+  background(4, 81, 191);
+  
+  for (int i=0; i<foods.length; i++) {
+    foods[i].run();
+  }
   
   PVector mousePos = new PVector(mouseX, mouseY);
   isRunning = position.dist(mousePos) < 100;
